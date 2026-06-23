@@ -650,6 +650,137 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold:0.06, rootMargin:'0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── Sign & Confirm flow ────────────────────────────────────────────────
+const sigName    = document.getElementById('sig-name');
+const sigTitle   = document.getElementById('sig-title');
+const sigCompany = document.getElementById('sig-company');
+const sigEmail   = document.getElementById('sig-email');
+const sigPreview = document.getElementById('sig-preview');
+const sigTimeEl  = document.getElementById('sig-timestamp');
+const sigError   = document.getElementById('sig-error');
+const sigBtn     = document.getElementById('sig-btn');
+
+// Live signature preview as the name is typed
+sigName.addEventListener('input', () => {
+  const v = sigName.value.trim();
+  sigPreview.textContent = v || 'Your name will appear here';
+  sigPreview.classList.toggle('active', !!v);
+});
+
+function clientSlug() {
+  return (CONFIG.client.name || 'client').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'client';
+}
+function programPeriod() {
+  const m = CONFIG.meta.find(x => /period/i.test(x.label));
+  return m ? m.value : '';
+}
+
+function buildPdf(d) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const W = doc.internal.pageSize.getWidth();
+  const M = 56;
+
+  // Header band (Aztec) + pear accent stripe
+  doc.setFillColor(14, 33, 28);  doc.rect(0, 0, W, 92, 'F');
+  doc.setFillColor(203, 221, 95); doc.rect(0, 92, W, 4, 'F');
+  doc.setTextColor(203, 221, 95); doc.setFont('helvetica', 'bold'); doc.setFontSize(16);
+  doc.text('RF STUDIOS MIAMI', M, 50);
+  doc.setTextColor(200, 217, 192); doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+  doc.text('Wellness Program Agreement', M, 70);
+
+  let y = 150;
+  doc.setTextColor(26, 25, 23); doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+  doc.text('Signed Proposal Agreement', M, y); y += 32;
+
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(60, 60, 60);
+  doc.text(`Client: ${CONFIG.client.name}`, M, y); y += 18;
+  if (programPeriod()) { doc.text(`Program Period: ${programPeriod()}`, M, y); y += 18; }
+  doc.text(`Total Investment: ${CONFIG.pricing.total}`, M, y); y += 32;
+
+  doc.setFontSize(10); doc.setTextColor(40, 40, 40);
+  const terms = 'By signing below, the undersigned confirms they are authorized to accept this proposal on behalf of their organization and agrees to move forward with the RF Studios Miami Wellness Program as outlined in this proposal.';
+  doc.text(doc.splitTextToSize(terms, W - M * 2), M, y); y += 64;
+
+  // Signature line + italic serif signature
+  doc.setDrawColor(190); doc.line(M, y + 26, M + 250, y + 26);
+  doc.setFont('times', 'italic'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+  doc.text(d.name, M, y + 20); y += 52;
+
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(80, 80, 80);
+  doc.text(`${d.name}${d.title ? ', ' + d.title : ''}`, M, y); y += 15;
+  doc.text(d.company, M, y); y += 15;
+  doc.text(d.email, M, y);   y += 15;
+  doc.text(`Signed: ${d.timestamp}`, M, y); y += 40;
+
+  doc.setTextColor(120, 120, 120); doc.setFontSize(9);
+  doc.text('On behalf of RF Studios Miami — Gina', M, y);
+
+  doc.save(`${clientSlug()}-proposal-signed-${new Date().toISOString().slice(0, 10)}.pdf`);
+}
+
+function sendEmails(d) {
+  const base = {
+    client_name: d.name, client_title: d.title, client_company: d.company,
+    client_email: d.email, timestamp: d.timestamp,
+    proposal_title: `${CONFIG.client.name} — RF Studios Wellness Proposal`,
+    program_period: programPeriod(),
+  };
+  const toGina = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
+    ...base, email: CONFIG.emailjs.rfEmail, reply_to: d.email,
+    subject: `✓ Signed Proposal — ${d.name} / ${d.company}`,
+  });
+  const toClient = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
+    ...base, email: d.email, reply_to: CONFIG.emailjs.rfEmail,
+    subject: 'Your RF Studios Miami Proposal — Signed & Confirmed',
+  });
+  return Promise.allSettled([toGina, toClient]);
+}
+
+function showConfirmation(d) {
+  document.getElementById('sig-form-wrap').style.display = 'none';
+  document.getElementById('confirm-email').textContent = d.email;
+  document.getElementById('confirm-details').innerHTML =
+    `<div><strong>Signed by:</strong> ${d.name}${d.title ? ', ' + d.title : ''}</div>` +
+    `<div style="margin-top:8px"><strong>Organization:</strong> ${d.company}</div>` +
+    `<div style="margin-top:8px"><strong>Date:</strong> ${d.timestamp}</div>`;
+  const c = document.getElementById('sig-confirm');
+  c.classList.add('visible');
+  c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function handleSubmit() {
+  const d = {
+    name:    sigName.value.trim(),
+    title:   sigTitle.value.trim(),
+    company: sigCompany.value.trim(),
+    email:   sigEmail.value.trim(),
+  };
+
+  // Step 1 — validation
+  if (!d.name || !d.company || !d.email || !d.email.includes('@')) {
+    sigError.classList.add('visible');
+    return;
+  }
+  sigError.classList.remove('visible');
+  sigBtn.disabled = true;
+  sigBtn.textContent = 'Processing…';
+
+  d.timestamp = new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' });
+
+  // Step 2 — client-side PDF (downloads to device)
+  try { buildPdf(d); }
+  catch (err) { console.error('PDF generation failed:', err); }
+
+  // Step 3 — notify Gina + the client, then Step 4 — confirmation screen
+  sendEmails(d).then(results => {
+    results.filter(r => r.status === 'rejected')
+           .forEach(r => console.warn('EmailJS send failed:', r.reason));
+    showConfirmation(d);
+  });
+}
 </script>
 </body>
 </html>
