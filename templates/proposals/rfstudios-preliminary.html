@@ -432,7 +432,7 @@ const CONFIG = {
     <h2 class="section-title">Recommended<br>Experiences</h2>
   </div>
   <div id="program-toggle-el" class="program-toggle reveal" onclick="toggleProgram()">
-    <span class="program-toggle-label">View Program Details</span>
+    <span class="program-toggle-label">Hide Program Details</span>
     <div style="display:flex;align-items:center;gap:12px;">
       <span class="program-toggle-hint" id="program-toggle-hint">5 experiences</span>
       <svg class="program-toggle-chevron" viewBox="0 0 18 18" fill="none">
@@ -553,17 +553,25 @@ CONFIG.classes.forEach((cls, i) => {
   cardsEl.appendChild(card);
 });
 
-function toggleProgram() {
-  const open = toggleEl.classList.toggle('program-open');
+function setProgramOpen(open, animate) {
+  toggleEl.classList.toggle('program-open', open);
+  const labelEl = document.querySelector('#program-toggle-el .program-toggle-label');
+  if (labelEl) labelEl.textContent = open ? 'Hide Program Details' : 'View Program Details';
   if (open) {
-    bodyEl.style.maxHeight = bodyEl.scrollHeight + 'px';
     bodyEl.querySelectorAll('.reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 80);
+      if (animate) setTimeout(() => el.classList.add('visible'), i * 80);
+      else el.classList.add('visible');
     });
+    bodyEl.style.maxHeight = animate ? bodyEl.scrollHeight + 'px' : 'none';
   } else {
     bodyEl.style.maxHeight = '0';
   }
 }
+function toggleProgram() {
+  setProgramOpen(!toggleEl.classList.contains('program-open'), true);
+}
+// Program expanded by default
+setProgramOpen(true, false);
 
 // Next steps
 const nsText = document.getElementById('ns-text-el');
