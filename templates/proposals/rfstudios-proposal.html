@@ -58,7 +58,7 @@ a{color:inherit;text-decoration:none;}
 .cover-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:space-between;min-height:100svh;padding:36px 48px 52px;}
 .cover-top{display:flex;align-items:center;justify-content:space-between;}
 .cover-logos{display:flex;align-items:center;}
-.logo-client-text{font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:0.06em;color:rgba(253,245,196,0.65);text-transform:uppercase;}
+.logo-client-text{font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:0.06em;color:rgba(253,245,196,0.85);text-transform:uppercase;}
 .logo-client-img{max-height:44px;max-width:180px;width:auto;height:auto;object-fit:contain;object-position:left center;filter:brightness(0) invert(1);opacity:0.8;}
 .cover-slash{display:flex;align-items:center;gap:5px;padding:0 20px;flex-shrink:0;}
 .cover-slash span{display:block;width:2px;background:var(--pear);transform:skewX(var(--skew));}
@@ -97,11 +97,11 @@ a{color:inherit;text-decoration:none;}
 .pricing-breakdown{display:flex;flex-direction:column;gap:0;}
 .breakdown-row{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--divider);}
 .breakdown-row:first-child{border-top:1px solid var(--divider);}
-.breakdown-label{font-size:13px;color:rgba(253,245,196,0.55);}
+.breakdown-label{font-size:13px;color:rgba(253,245,196,0.90);}
 .breakdown-amount{font-family:var(--font-display);font-weight:500;font-size:22px;letter-spacing:0.02em;color:var(--white);}
-.breakdown-note{font-size:11px;color:var(--muted);margin-top:4px;}
+.breakdown-note{font-size:11px;color:rgba(253,245,196,0.70);margin-top:4px;}
 .pricing-notes{margin-top:32px;display:flex;flex-direction:column;gap:10px;}
-.pricing-note-item{font-size:12px;color:var(--muted);padding-left:16px;position:relative;line-height:1.6;}
+.pricing-note-item{font-size:12px;color:rgba(253,245,196,0.80);padding-left:16px;position:relative;line-height:1.6;}
 .pricing-note-item::before{content:'—';position:absolute;left:0;color:var(--spring);}
 
 /* ── CLASSES COLLAPSED ── */
@@ -110,26 +110,122 @@ a{color:inherit;text-decoration:none;}
 .section-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--pear);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
 .section-eyebrow::before{content:'';display:block;width:18px;height:2px;background:var(--pear);transform:skewX(var(--skew));flex-shrink:0;}
 .section-title{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,5vw,60px);line-height:0.92;color:var(--white);text-transform:uppercase;letter-spacing:0.01em;}
-.section-sub{margin-top:14px;font-size:14px;line-height:1.75;color:rgba(253,245,196,0.45);max-width:540px;}
-.class-accordion{border-top:1px solid var(--divider);}
-.class-item{border-bottom:1px solid var(--divider);overflow:hidden;}
-.class-trigger{width:100%;display:grid;grid-template-columns:auto 1fr auto auto;gap:24px;align-items:center;padding:24px 0;cursor:pointer;background:none;border:none;color:inherit;text-align:left;transition:background 0.2s;}
-.class-trigger:hover{background:rgba(22,48,40,0.3);}
-.class-month{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);width:90px;flex-shrink:0;}
-.class-title{font-family:var(--font-display);font-weight:500;font-size:clamp(18px,2.5vw,26px);letter-spacing:0.02em;text-transform:uppercase;color:var(--white);}
-.class-tag{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--pear);background:var(--pear-muted);padding:4px 10px;white-space:nowrap;flex-shrink:0;}
-.class-chevron{width:16px;height:16px;flex-shrink:0;transition:transform 0.3s var(--ease);}
-.class-chevron line{stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;transition:stroke 0.2s;}
-.class-item.open .class-chevron{transform:rotate(180deg);}
-.class-item.open .class-chevron line{stroke:var(--pear);}
-.class-body{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease);}
-.class-body-inner{padding:0 0 32px 114px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
-.class-desc{font-size:13px;line-height:1.8;color:rgba(253,245,196,0.5);}
-.class-benefits-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pear);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.class-benefits-label::before{content:'';display:block;width:12px;height:2px;background:var(--pear);transform:skewX(var(--skew));flex-shrink:0;}
-.class-benefits-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.class-benefits-list li{font-size:12px;line-height:1.6;color:rgba(253,245,196,0.5);padding-left:18px;position:relative;}
-.class-benefits-list li::before{content:'—';position:absolute;left:0;color:var(--spring);}
+.section-sub{margin-top:14px;font-size:14px;line-height:1.75;color:rgba(253,245,196,0.85);max-width:540px;}
+/* ── PROGRAM TOGGLE ── */
+.program-toggle{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);cursor:pointer;margin-bottom:0;transition:border-color 0.2s;}
+.program-toggle:hover .program-toggle-label{color:var(--pear);}
+.program-toggle-label{font-family:var(--font-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:0.04em;text-transform:uppercase;color:var(--white);transition:color 0.2s;}
+.program-toggle-hint{font-family:var(--font-body);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;}
+.program-toggle-chevron{width:18px;height:18px;flex-shrink:0;transition:transform 0.35s var(--ease);}
+.program-toggle-chevron line{stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;}
+.program-open .program-toggle-chevron{transform:rotate(180deg);}
+.program-open .program-toggle-chevron line{stroke:var(--pear);}
+.program-open .program-toggle-label{color:var(--pear);}
+.program-open .program-toggle-hint{color:var(--pear);}
+.program-body{max-height:0;overflow:hidden;transition:max-height 0.6s var(--ease);}
+
+/* ── OPTION CARDS (from original design) ── */
+.options-stack{display:flex;flex-direction:column;gap:2px;margin-top:2px;}
+.option-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:var(--bush);
+  overflow:hidden;
+  border:1px solid var(--divider);
+  transition:border-color 0.3s var(--ease);
+}
+.option-card:hover{border-color:var(--spring);}
+.option-card.flip .option-card-photo{order:2;}
+.option-card.flip .option-card-body{order:1;}
+.option-card-photo{
+  position:relative;
+  min-height:380px;
+  background:var(--aztec);
+  overflow:hidden;
+}
+.option-card-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.7s var(--ease);
+}
+.option-card:hover .option-card-photo img{transform:scale(1.04);}
+.option-photo-placeholder{
+  position:absolute;inset:0;
+  background:linear-gradient(145deg,var(--bush) 0%,var(--aztec) 100%);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;
+  font-family:var(--font-body);font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+.option-photo-placeholder svg{width:36px;height:36px;opacity:0.3;}
+.option-card-photo::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:var(--pear);z-index:2;
+}
+.option-num{
+  position:absolute;bottom:20px;left:24px;z-index:3;
+  font-family:var(--font-display);font-weight:500;
+  font-size:88px;line-height:1;
+  color:rgba(203,221,95,0.12);
+  letter-spacing:0.01em;user-select:none;
+}
+.option-card-body{
+  padding:52px 52px 52px 56px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid var(--divider);
+}
+.option-card.flip .option-card-body{
+  border-left:none;border-right:1px solid var(--divider);
+  padding:52px 56px 52px 52px;
+}
+.option-month{
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+.option-tag{
+  display:inline-block;
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--pear);
+  background:var(--pear-muted);
+  padding:5px 12px;margin-bottom:20px;align-self:flex-start;
+}
+.option-name{
+  font-family:var(--font-display);font-weight:500;
+  font-size:clamp(30px,4vw,52px);
+  line-height:0.92;color:var(--white);
+  text-transform:uppercase;margin-bottom:20px;letter-spacing:0.01em;
+}
+.option-desc{
+  font-size:14px;line-height:1.8;
+  color:rgba(253,245,196,0.90);max-width:400px;
+}
+.option-benefits-label{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--divider);
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--pear);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.option-benefits-label::before{
+  content:'';display:block;width:14px;height:2px;
+  background:var(--spring);transform:skewX(var(--skew));
+}
+.option-benefits{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.option-benefits li{
+  font-size:13px;line-height:1.6;
+  color:rgba(253,245,196,0.88);
+  padding-left:18px;position:relative;
+}
+.option-benefits li::before{content:'—';position:absolute;left:0;color:var(--spring);}
+
+/* No-photo: 2-col text layout */
+/* no-photo: uses placeholder, same layout */
+
 
 /* ── SIGNATURE ── */
 .sig-section{background:var(--bush);border-top:1px solid var(--divider);padding:80px 48px;}
@@ -137,18 +233,18 @@ a{color:inherit;text-decoration:none;}
 .sig-form-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
 .sig-fields{display:flex;flex-direction:column;gap:20px;}
 .sig-field{display:flex;flex-direction:column;gap:8px;}
-.sig-field label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
+.sig-field label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,245,196,0.75);}
 .sig-field input{background:rgba(22,48,40,0.4);border:1px solid var(--divider);padding:13px 16px;font-family:var(--font-body);font-size:14px;color:var(--beeswax);outline:none;transition:border-color 0.2s;}
 .sig-field input::placeholder{color:var(--muted);opacity:0.6;}
 .sig-field input:focus{border-color:var(--spring);}
 .sig-fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;}
 .sig-right{display:flex;flex-direction:column;gap:24px;}
 .sig-preview-wrap{}
-.sig-preview-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sig-preview-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,245,196,0.80);margin-bottom:10px;}
 .sig-preview{font-family:'Georgia',serif;font-size:36px;font-style:italic;color:var(--white);border-bottom:1px solid var(--divider);padding-bottom:10px;min-height:56px;transition:opacity 0.2s;opacity:0.35;}
 .sig-preview.active{opacity:1;}
-.sig-timestamp{font-size:11px;color:var(--muted);margin-top:8px;letter-spacing:0.04em;}
-.sig-terms{background:rgba(14,33,28,0.4);border:1px solid var(--divider);padding:18px 20px;font-size:12px;color:var(--muted);line-height:1.7;}
+.sig-timestamp{font-size:11px;color:rgba(253,245,196,0.70);margin-top:8px;letter-spacing:0.04em;}
+.sig-terms{background:rgba(14,33,28,0.4);border:1px solid var(--divider);padding:18px 20px;font-size:12px;color:rgba(253,245,196,0.90);line-height:1.7;}
 .sig-error{display:none;background:rgba(200,60,60,0.1);border:1px solid rgba(200,60,60,0.25);padding:12px 16px;font-size:12px;color:#f4a0a0;}
 .sig-error.visible{display:block;}
 .sig-btn{background:var(--pear);color:var(--aztec);border:none;padding:16px 32px;font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.1s;width:100%;}
@@ -159,7 +255,7 @@ a{color:inherit;text-decoration:none;}
 .sig-confirm.visible{display:block;}
 .sig-confirm-check{width:60px;height:60px;background:var(--pear);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;color:var(--aztec);}
 .sig-confirm-title{font-family:var(--font-display);font-weight:500;font-size:32px;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
-.sig-confirm-sub{font-size:14px;color:var(--muted);line-height:1.7;}
+.sig-confirm-sub{font-size:14px;color:rgba(253,245,196,0.90);line-height:1.7;}
 .sig-confirm-details{margin-top:24px;background:rgba(14,33,28,0.4);border:1px solid var(--divider);padding:20px 24px;font-size:13px;color:var(--muted);text-align:left;max-width:400px;margin-left:auto;margin-right:auto;}
 .sig-confirm-details strong{color:var(--beeswax);}
 
@@ -183,9 +279,17 @@ a{color:inherit;text-decoration:none;}
   .pricing-section{padding:56px 24px;}
   .pricing-grid{grid-template-columns:1fr;gap:40px;}
   .classes-section{padding:56px 24px;}
-  .class-trigger{grid-template-columns:1fr auto;gap:16px;}
-  .class-month{display:none;}
-  .class-body-inner{padding:0 0 28px 0;grid-template-columns:1fr;}
+  .option-card{grid-template-columns:1fr;}
+  .option-card.flip .option-card-photo{order:0;}
+  .option-card.flip .option-card-body{order:0;}
+  .option-card-photo{min-height:260px;}
+  .option-card-body{
+    padding:36px 28px!important;
+    border-left:none!important;border-right:none!important;
+    border-top:1px solid var(--divider);
+  }
+  .option-card.no-photo .option-card-body{grid-template-columns:1fr;}
+
   .sig-section{padding:56px 24px;}
   .sig-form-wrap{grid-template-columns:1fr;gap:36px;}
   .sig-fields-grid{grid-template-columns:1fr;}
@@ -211,36 +315,36 @@ const CONFIG = {
 
   // ── Client ────────────────────────────────────────────────
   client: {
-    name:    "The Sporting Club at Continuum",
+    name:    "CLIENT NAME",
     logoUrl: "",
-    logoAlt: "The Sporting Club at Continuum",
+    logoAlt: "CLIENT NAME",
   },
 
   rfStudiosLogoUrl: "",
 
   // ── Cover ─────────────────────────────────────────────────
   cover: {
-    photoUrl:  "",
+    photoUrl: "",  // add URL or base64 image here
     eyebrow:   "A Curated Wellness Series",
     headline:  "Wellness\nProposal",
     stagePill: "Proposal",
   },
 
   meta: [
-    { label: "Program Period", value: "Nov 2026 – Mar 2027" },
+    { label: "Program Period", value: "MONTH YYYY – MONTH YYYY" },
     { label: "Frequency",      value: "1 Event / Month" },
-    { label: "Prepared For",   value: "The Sporting Club" },
+    { label: "Prepared For",   value: "CLIENT SHORT NAME" },
   ],
 
   // ── Overview ──────────────────────────────────────────────
-  overview: "Our studio specializes in innovative, community-driven fitness and wellness experiences designed to engage participants of all fitness levels.",
+  overview: "PARTNERSHIP OVERVIEW — describe the series and what RF Studios brings to this venue.",
 
   // ── Pricing ───────────────────────────────────────────────
   pricing: {
     total:  "$X,XXX",
     period: "Per event · November 2026 – March 2027",
     breakdown: [
-      { label: "25% Deposit to Secure",  amount: "$X,XXX", note: "Required to confirm the programme" },
+      { label: "25% Deposit to Secure",  amount: "$X,XXX", note: "Required to confirm the program" },
       { label: "Balance Per Event",      amount: "$X,XXX", note: "Due day of each event" },
     ],
     notes: [
@@ -343,7 +447,7 @@ const CONFIG = {
 <section class="pricing-section">
   <div class="reveal">
     <div class="section-eyebrow">Investment</div>
-    <h2 class="section-title">Programme<br>Pricing</h2>
+    <h2 class="section-title">Program<br>Pricing</h2>
   </div>
   <div class="pricing-grid reveal">
     <div class="pricing-total-block">
@@ -361,11 +465,21 @@ const CONFIG = {
 <!-- CLASSES -->
 <section class="classes-section">
   <div class="classes-header reveal">
-    <div class="section-eyebrow">Programme Details</div>
+    <div class="section-eyebrow">Program Details</div>
     <h2 class="section-title">Monthly<br>Experiences</h2>
-    <p class="section-sub">Click any session to view details.</p>
   </div>
-  <div class="class-accordion" id="class-accordion-el"></div>
+  <div id="program-toggle-el" class="program-toggle reveal" onclick="toggleProgram()">
+    <span class="program-toggle-label">View Program Details</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="program-toggle-hint" id="program-toggle-hint">5 experiences</span>
+      <svg class="program-toggle-chevron" viewBox="0 0 18 18" fill="none">
+        <line x1="3" y1="6" x2="9" y2="12"/><line x1="9" y1="12" x2="15" y2="6"/>
+      </svg>
+    </div>
+  </div>
+  <div class="program-body" id="program-body-el">
+    <div class="class-cards" id="class-cards-el"></div>
+  </div>
 </section>
 
 <!-- SIGNATURE -->
@@ -373,7 +487,7 @@ const CONFIG = {
   <div class="sig-header reveal">
     <div class="section-eyebrow">Accept Proposal</div>
     <h2 class="section-title">Sign &amp;<br>Confirm</h2>
-    <p class="section-sub" style="max-width:480px;">By signing below you confirm agreement to the programme as outlined. A signed copy will be emailed to both parties.</p>
+    <p class="section-sub" style="max-width:480px;color:rgba(253,245,196,0.85);">By signing below you confirm agreement to the program as outlined. A signed copy will be emailed to both parties.</p>
   </div>
 
   <div id="sig-form-wrap">
@@ -408,7 +522,7 @@ const CONFIG = {
           <div class="sig-timestamp" id="sig-timestamp"></div>
         </div>
         <div class="sig-terms">
-          By submitting, you confirm you are authorized to accept this proposal on behalf of your organization and agree to move forward with the RF Studios Miami Wellness Programme as outlined.
+          By submitting, you confirm you are authorized to accept this proposal on behalf of your organization and agree to move forward with the RF Studios Miami Wellness Program as outlined.
         </div>
         <button class="sig-btn" id="sig-btn" onclick="handleSubmit()">
           Accept &amp; Send Agreement
@@ -474,167 +588,53 @@ CONFIG.pricing.notes.forEach(n => {
   notesEl.innerHTML += `<div class="pricing-note-item">${n}</div>`;
 });
 
-// Classes
-const accordion = document.getElementById('class-accordion-el');
+// Program toggle — single toggle reveals all cards
+const cardsEl  = document.getElementById('class-cards-el');
+const toggleEl = document.getElementById('program-toggle-el');
+const bodyEl   = document.getElementById('program-body-el');
+document.getElementById('program-toggle-hint').textContent = CONFIG.classes.length + ' experiences';
+
 CONFIG.classes.forEach((cls, i) => {
-  const item = document.createElement('div');
-  item.className = 'class-item reveal';
-  item.innerHTML = `
-    <button class="class-trigger" aria-expanded="false" onclick="toggleClass(this)">
-      <span class="class-month">${cls.month}</span>
-      <span class="class-title">${cls.title}</span>
-      <span class="class-tag">${cls.tag}</span>
-      <svg class="class-chevron" viewBox="0 0 18 18" fill="none">
-        <line x1="3" y1="6" x2="9" y2="12"/><line x1="9" y1="12" x2="15" y2="6"/>
-      </svg>
-    </button>
-    <div class="class-body">
-      <div class="class-body-inner">
-        <p class="class-desc">${cls.desc}</p>
-        <div>
-          <div class="class-benefits-label">${i===4?'Potential Options':'Resident Benefits'}</div>
-          <ul class="class-benefits-list">${cls.benefits.map(b=>`<li>${b}</li>`).join('')}</ul>
-        </div>
-      </div>
+  const flip = i % 2 !== 0;
+  const card = document.createElement('div');
+  card.className = `option-card${flip ? ' flip' : ''} reveal`;
+
+  // Always render photo side — placeholder if no photoUrl (matches original design)
+  const photoContent = cls.photoUrl
+    ? `<img src="${cls.photoUrl}" alt="${cls.title}">`
+    : `<div class="option-photo-placeholder">
+        <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 28L13 20L19 26L25 20L36 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ${cls.title}
+       </div>`;
+
+  const benefitsLabel = i === CONFIG.classes.length - 1 ? 'Potential Options' : 'Resident Benefits';
+
+  card.innerHTML = `
+    <div class="option-card-photo">
+      ${photoContent}
+      <div class="option-num">0${i + 1}</div>
+    </div>
+    <div class="option-card-body">
+      ${cls.month ? `<div class="option-month">${cls.month}</div>` : ''}
+      <span class="option-tag">${cls.tag}</span>
+      <h3 class="option-name">${cls.title}</h3>
+      <p class="option-desc">${cls.desc}</p>
+      <div class="option-benefits-label">${benefitsLabel}</div>
+      <ul class="option-benefits">${cls.benefits.map(b => `<li>${b}</li>`).join('')}</ul>
     </div>`;
-  accordion.appendChild(item);
+
+  cardsEl.appendChild(card);
 });
 
-function toggleClass(btn) {
-  const item = btn.closest('.class-item');
-  const body = item.querySelector('.class-body');
-  const open = item.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-  body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
-}
-
-// Footer
-document.getElementById('footer-links-el').innerHTML = `
-  <a href="mailto:${CONFIG.contact.email}">${CONFIG.contact.email}</a>
-  <a href="https://${CONFIG.contact.website}" target="_blank">${CONFIG.contact.website}</a>
-  <span style="color:var(--muted)">${CONFIG.contact.insta}</span>`;
-
-// ── Signature preview ──────────────────────────────────────────────────
-const nameInput = document.getElementById('sig-name');
-const preview   = document.getElementById('sig-preview');
-const tsEl      = document.getElementById('sig-timestamp');
-
-function updateTs() {
-  const now = new Date();
-  tsEl.textContent = now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) + ' at ' + now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
-}
-nameInput.addEventListener('input', () => {
-  const v = nameInput.value.trim();
-  preview.textContent = v || 'Your name will appear here';
-  preview.classList.toggle('active', !!v);
-  if (v) updateTs();
-  else tsEl.textContent = '';
-});
-updateTs(); setInterval(updateTs, 30000);
-
-// ── PDF generation ─────────────────────────────────────────────────────
-function generatePDF(data) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation:'portrait', unit:'pt', format:'letter' });
-  const W=612, MX=46, CW=W-MX*2;
-  const AZTEC=[14,33,28], PEAR=[203,221,95], BEESWAX=[253,245,196], INK=[26,25,23], SPRING=[51,114,68], MUTED=[74,122,98], PBG=[248,248,246];
-  doc.setFillColor(...PBG); doc.rect(0,0,W,792,'F');
-  doc.setFillColor(...AZTEC); doc.rect(0,0,W,50,'F');
-  doc.setFillColor(...PEAR); doc.rect(0,47,W,3,'F');
-  doc.setTextColor(...BEESWAX); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('RF STUDIOS MIAMI', MX, 30);
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(200,217,192);
-  doc.text('RFStudiosMiami.com', W-MX, 30, {align:'right'});
-  let y=78;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...SPRING);
-  doc.text('SIGNED PROPOSAL AGREEMENT', MX, y); y+=18;
-  doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(...INK);
-  doc.text(CONFIG.client.name, MX, y); y+=22;
-  doc.text('Wellness Programme', MX, y); y+=10;
-  doc.setDrawColor(...PEAR); doc.setLineWidth(1.5); doc.line(MX,y,MX+CW,y); y+=18;
-  doc.setFillColor(...AZTEC); doc.roundedRect(MX,y,CW,40,4,4,'F');
-  doc.setFillColor(...PEAR); doc.rect(MX,y,5,40,'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MUTED);
-  doc.text('PROGRAMME PERIOD', MX+14, y+14);
-  doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.setTextColor(...BEESWAX);
-  doc.text(CONFIG.meta[0]?.value || '', MX+14, y+29); y+=56;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...SPRING);
-  doc.text('PRICING AGREED', MX, y); y+=14;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...SPRING);
-  doc.text('Total: ', MX, y); doc.setFont('helvetica','normal'); doc.setTextColor(...INK);
-  doc.text(CONFIG.pricing.total, MX+30, y); y+=18;
-  doc.setDrawColor(180,200,160); doc.setLineWidth(0.5); doc.line(MX,y,MX+CW,y); y+=14;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...SPRING);
-  doc.text('AGREEMENT TERMS', MX, y); y+=12;
-  const terms = 'By signing this document, the undersigned confirms they are authorized to accept this proposal on behalf of their organization and agree to proceed with the RF Studios Miami Wellness Programme as outlined.';
-  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...INK);
-  const termLines = doc.splitTextToSize(terms, CW);
-  doc.text(termLines, MX, y); y+=termLines.length*13+20;
-  doc.setFillColor(...AZTEC); doc.roundedRect(MX,y,CW,110,4,4,'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...PEAR);
-  doc.text('AUTHORIZED SIGNATURE', MX+14, y+18);
-  doc.setFont('times','italic'); doc.setFontSize(28); doc.setTextColor(...BEESWAX);
-  doc.text(data.name, MX+14, y+52);
-  doc.setDrawColor(...PEAR); doc.setLineWidth(0.5); doc.line(MX+14,y+58,MX+14+240,y+58);
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(184,201,176);
-  doc.text(`${data.name}${data.title?' · '+data.title:''}`, MX+14, y+72);
-  doc.text(data.company, MX+14, y+84); doc.text(data.timestamp, MX+14, y+96);
-  y+=126;
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...SPRING);
-  doc.text('ON BEHALF OF RF STUDIOS MIAMI', MX, y); y+=10;
-  doc.setDrawColor(100,140,110); doc.setLineWidth(0.5); doc.line(MX,y,MX+220,y); y+=10;
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...MUTED);
-  doc.text('Gina · RF Studios Miami · gina@RFStudiosMiami.com', MX, y);
-  doc.setFillColor(...AZTEC); doc.rect(0,756,W,36,'F');
-  doc.setFillColor(...PEAR); doc.rect(0,756,W,2,'F');
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(100,140,110);
-  doc.text(`${CONFIG.client.name} · Wellness Programme`, W/2, 773, {align:'center'});
-  doc.text('RFStudiosMiami.com', W-MX, 773, {align:'right'});
-  return doc.output('datauristring');
-}
-
-// ── Submit ─────────────────────────────────────────────────────────────
-async function handleSubmit() {
-  const name    = document.getElementById('sig-name').value.trim();
-  const title   = document.getElementById('sig-title').value.trim();
-  const company = document.getElementById('sig-company').value.trim();
-  const email   = document.getElementById('sig-email').value.trim();
-  const errEl   = document.getElementById('sig-error');
-  if (!name || !company || !email || !email.includes('@')) {
-    errEl.textContent = 'Please fill in all required fields (Name, Organization, Email).';
-    errEl.classList.add('visible'); return;
-  }
-  errEl.classList.remove('visible');
-  const btn = document.getElementById('sig-btn');
-  btn.disabled=true; btn.textContent='Generating agreement…';
-  const now = new Date();
-  const timestamp = now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) + ' at ' + now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
-  const data = {name,title,company,email,timestamp};
-  btn.textContent='Sending…';
-  const pdfUri = generatePDF(data);
-  const params = {
-    client_name:    name,
-    client_title:   title ? ` · ${title}` : '',
-    client_company: company,
-    client_email:   email,
-    timestamp,
-    reply_to:       email,
-    proposal_title: `${CONFIG.client.name} Wellness Programme`,
-    program_period: CONFIG.meta[0]?.value || '',
-  };
-  try {
-    await emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, { ...params, email: CONFIG.emailjs.rfEmail, subject: `✓ Signed Proposal — ${name} / ${company}` });
-    await emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, { ...params, email, subject: 'Your RF Studios Miami Proposal — Signed & Confirmed' });
-    document.getElementById('sig-form-wrap').style.display='none';
-    document.getElementById('sig-confirm').classList.add('visible');
-    document.getElementById('confirm-email').textContent = email;
-    document.getElementById('confirm-details').innerHTML = `<strong>Signed by:</strong> ${name}${title?', '+title:''}<br><strong>Organization:</strong> ${company}<br><strong>Date:</strong> ${timestamp}`;
-    const link = document.createElement('a');
-    link.href=pdfUri; link.download='RFStudios-WellnessProposal-Signed.pdf'; link.click();
-  } catch(err) {
-    btn.disabled=false; btn.textContent='Accept & Send Agreement';
-    errEl.textContent='Something went wrong. Please try again or email gina@RFStudiosMiami.com.';
-    errEl.classList.add('visible');
+function toggleProgram() {
+  const open = toggleEl.classList.toggle('program-open');
+  if (open) {
+    bodyEl.style.maxHeight = bodyEl.scrollHeight + 'px';
+    bodyEl.querySelectorAll('.reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  } else {
+    bodyEl.style.maxHeight = '0';
   }
 }
 

@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none;}
 .cover-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:space-between;min-height:100svh;padding:36px 48px 52px;}
 .cover-top{display:flex;align-items:center;justify-content:space-between;}
 .cover-logos{display:flex;align-items:center;}
-.logo-client-text{font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:0.06em;color:rgba(253,245,196,0.65);text-transform:uppercase;}
+.logo-client-text{font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:0.06em;color:rgba(253,245,196,0.85);text-transform:uppercase;}
 .logo-client-img{max-height:44px;max-width:180px;width:auto;height:auto;object-fit:contain;object-position:left center;filter:brightness(0) invert(1);opacity:0.8;}
 .cover-slash{display:flex;align-items:center;gap:5px;padding:0 20px;flex-shrink:0;}
 .cover-slash span{display:block;width:2px;background:var(--pear);transform:skewX(var(--skew));}
@@ -96,42 +96,137 @@ a{color:inherit;text-decoration:none;}
 .section-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--pear);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
 .section-eyebrow::before{content:'';display:block;width:18px;height:2px;background:var(--pear);transform:skewX(var(--skew));flex-shrink:0;}
 .section-title{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,5vw,60px);line-height:0.92;color:var(--white);text-transform:uppercase;letter-spacing:0.01em;}
-.section-sub{margin-top:14px;font-size:14px;line-height:1.75;color:rgba(253,245,196,0.45);max-width:540px;}
+.section-sub{margin-top:14px;font-size:14px;line-height:1.75;color:rgba(253,245,196,0.85);max-width:540px;}
 
 /* ── CLASS ACCORDION ── */
 .classes-section{background:var(--aztec);padding:80px 48px;}
 .classes-header{margin-bottom:56px;}
-.class-accordion{border-top:1px solid var(--divider);}
-.class-item{border-bottom:1px solid var(--divider);overflow:hidden;}
-.class-trigger{width:100%;display:grid;grid-template-columns:auto 1fr auto auto;gap:24px;align-items:center;padding:28px 0;cursor:pointer;background:none;border:none;color:inherit;text-align:left;transition:background 0.2s;}
-.class-trigger:hover{background:rgba(22,48,40,0.3);}
-.class-month{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);width:90px;flex-shrink:0;}
-.class-title{font-family:var(--font-display);font-weight:500;font-size:clamp(20px,3vw,32px);letter-spacing:0.02em;text-transform:uppercase;color:var(--white);}
-.class-tag{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--pear);background:var(--pear-muted);padding:5px 12px;white-space:nowrap;flex-shrink:0;}
-.class-chevron{width:18px;height:18px;flex-shrink:0;transition:transform 0.3s var(--ease);}
-.class-chevron line{stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;transition:stroke 0.2s;}
-.class-item.open .class-chevron{transform:rotate(180deg);}
-.class-item.open .class-chevron line{stroke:var(--pear);}
-.class-body{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease);}
-.class-body-inner{padding:0 0 40px 114px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-.class-desc{font-size:14px;line-height:1.8;color:rgba(253,245,196,0.55);}
-.class-benefits-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pear);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.class-benefits-label::before{content:'';display:block;width:12px;height:2px;background:var(--pear);transform:skewX(var(--skew));flex-shrink:0;}
-.class-benefits-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.class-benefits-list li{font-size:13px;line-height:1.6;color:rgba(253,245,196,0.6);padding-left:20px;position:relative;}
-.class-benefits-list li::before{content:'—';position:absolute;left:0;color:var(--spring);}
+/* ── PROGRAM TOGGLE ── */
+.program-toggle{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);cursor:pointer;margin-bottom:0;transition:border-color 0.2s;}
+.program-toggle:hover .program-toggle-label{color:var(--pear);}
+.program-toggle-label{font-family:var(--font-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:0.04em;text-transform:uppercase;color:var(--white);transition:color 0.2s;}
+.program-toggle-hint{font-family:var(--font-body);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;}
+.program-toggle-chevron{width:18px;height:18px;flex-shrink:0;transition:transform 0.35s var(--ease);}
+.program-toggle-chevron line{stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;}
+.program-open .program-toggle-chevron{transform:rotate(180deg);}
+.program-open .program-toggle-chevron line{stroke:var(--pear);}
+.program-open .program-toggle-label{color:var(--pear);}
+.program-open .program-toggle-hint{color:var(--pear);}
+.program-body{max-height:0;overflow:hidden;transition:max-height 0.6s var(--ease);}
+
+/* ── OPTION CARDS (from original design) ── */
+.options-stack{display:flex;flex-direction:column;gap:2px;margin-top:2px;}
+.option-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:var(--bush);
+  overflow:hidden;
+  border:1px solid var(--divider);
+  transition:border-color 0.3s var(--ease);
+}
+.option-card:hover{border-color:var(--spring);}
+.option-card.flip .option-card-photo{order:2;}
+.option-card.flip .option-card-body{order:1;}
+.option-card-photo{
+  position:relative;
+  min-height:380px;
+  background:var(--aztec);
+  overflow:hidden;
+}
+.option-card-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.7s var(--ease);
+}
+.option-card:hover .option-card-photo img{transform:scale(1.04);}
+.option-photo-placeholder{
+  position:absolute;inset:0;
+  background:linear-gradient(145deg,var(--bush) 0%,var(--aztec) 100%);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;
+  font-family:var(--font-body);font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+.option-photo-placeholder svg{width:36px;height:36px;opacity:0.3;}
+.option-card-photo::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:var(--pear);z-index:2;
+}
+.option-num{
+  position:absolute;bottom:20px;left:24px;z-index:3;
+  font-family:var(--font-display);font-weight:500;
+  font-size:88px;line-height:1;
+  color:rgba(203,221,95,0.12);
+  letter-spacing:0.01em;user-select:none;
+}
+.option-card-body{
+  padding:52px 52px 52px 56px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid var(--divider);
+}
+.option-card.flip .option-card-body{
+  border-left:none;border-right:1px solid var(--divider);
+  padding:52px 56px 52px 52px;
+}
+.option-month{
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+.option-tag{
+  display:inline-block;
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--pear);
+  background:var(--pear-muted);
+  padding:5px 12px;margin-bottom:20px;align-self:flex-start;
+}
+.option-name{
+  font-family:var(--font-display);font-weight:500;
+  font-size:clamp(30px,4vw,52px);
+  line-height:0.92;color:var(--white);
+  text-transform:uppercase;margin-bottom:20px;letter-spacing:0.01em;
+}
+.option-desc{
+  font-size:14px;line-height:1.8;
+  color:rgba(253,245,196,0.90);max-width:400px;
+}
+.option-benefits-label{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--divider);
+  font-family:var(--font-body);font-size:9px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--pear);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.option-benefits-label::before{
+  content:'';display:block;width:14px;height:2px;
+  background:var(--spring);transform:skewX(var(--skew));
+}
+.option-benefits{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.option-benefits li{
+  font-size:13px;line-height:1.6;
+  color:rgba(253,245,196,0.88);
+  padding-left:18px;position:relative;
+}
+.option-benefits li::before{content:'—';position:absolute;left:0;color:var(--spring);}
+
+/* No-photo: 2-col text layout */
+/* no-photo: uses placeholder, same layout */
 
 /* ── NEXT STEPS ── */
 .next-steps{background:var(--bush);border-top:1px solid var(--divider);padding:80px 48px;}
 .next-steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:56px;}
-.ns-text p{font-size:15px;line-height:1.8;color:rgba(253,245,196,0.55);}
+.ns-text p{font-size:15px;line-height:1.8;color:rgba(253,245,196,0.90);}
 .ns-text p+p{margin-top:16px;}
 .ns-note{background:var(--aztec);border:1px solid var(--divider);padding:28px 32px;margin-top:24px;}
 .ns-note-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pear);margin-bottom:10px;}
 .ns-note-text{font-size:13px;line-height:1.7;color:var(--muted);}
 .ns-contact{display:flex;flex-direction:column;gap:16px;}
 .ns-contact-item{display:flex;flex-direction:column;gap:5px;}
-.ns-contact-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
+.ns-contact-label{font-family:var(--font-body);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,245,196,0.65);}
 .ns-contact-value{font-family:var(--font-display);font-weight:400;font-size:16px;letter-spacing:0.03em;color:var(--beeswax);}
 .ns-contact-value a:hover{color:var(--pear);}
 .ns-divider{width:100%;height:1px;background:var(--divider);margin:8px 0;}
@@ -157,9 +252,16 @@ a{color:inherit;text-decoration:none;}
   .period-strip{padding:24px 24px;gap:24px;}
   .period-div{display:none;}
   .classes-section{padding:56px 24px;}
-  .class-trigger{grid-template-columns:1fr auto;gap:16px;padding:24px 0;}
-  .class-month{display:none;}
-  .class-body-inner{padding:0 0 32px 0;grid-template-columns:1fr;}
+  .option-card{grid-template-columns:1fr;}
+  .option-card.flip .option-card-photo{order:0;}
+  .option-card.flip .option-card-body{order:0;}
+  .option-card-photo{min-height:260px;}
+  .option-card-body{
+    padding:36px 28px!important;
+    border-left:none!important;border-right:none!important;
+    border-top:1px solid var(--divider);
+  }
+  .option-card.no-photo .option-card-body{grid-template-columns:1fr;}
   .next-steps{padding:56px 24px;}
   .next-steps-grid{grid-template-columns:1fr;gap:32px;}
   .footer{padding:24px;flex-direction:column;align-items:flex-start;}
@@ -175,27 +277,27 @@ a{color:inherit;text-decoration:none;}
 const CONFIG = {
 
   client: {
-    name:    "The Sporting Club at Continuum",
+    name:    "CLIENT NAME",
     logoUrl: "",
-    logoAlt: "The Sporting Club at Continuum",
+    logoAlt: "CLIENT NAME",
   },
 
   rfStudiosLogoUrl: "",
 
   cover: {
-    photoUrl: "",
+    photoUrl: "",  // add URL or base64 image here
     eyebrow:  "A Curated Wellness Series",
     headline: "Wellness\nSeries",
     stagePill: "Preliminary Proposal",
   },
 
   meta: [
-    { label: "Program Period",     value: "Nov 2026 – Mar 2027" },
+    { label: "Program Period",     value: "MONTH YYYY – MONTH YYYY" },
     { label: "Frequency",          value: "1 Event / Month" },
-    { label: "Prepared For",       value: "The Sporting Club" },
+    { label: "Prepared For",       value: "CLIENT SHORT NAME" },
   ],
 
-  overview: "Our studio specializes in innovative, community-driven fitness and wellness experiences designed to engage participants of all fitness levels. We are excited to create a curated wellness series that enhances resident experience, encourages connection, and supports overall wellbeing.",
+  overview: "PARTNERSHIP OVERVIEW — describe the series and what RF Studios brings to this venue.",
 
   classes: [
     {
@@ -325,11 +427,21 @@ const CONFIG = {
 <!-- CLASSES -->
 <section class="classes-section">
   <div class="classes-header reveal">
-    <div class="section-eyebrow">Wellness Programme</div>
+    <div class="section-eyebrow">Wellness Program</div>
     <h2 class="section-title">Recommended<br>Experiences</h2>
-    <p class="section-sub">Select any session to view details, benefits, and format notes.</p>
   </div>
-  <div class="class-accordion" id="class-accordion-el"></div>
+  <div id="program-toggle-el" class="program-toggle reveal" onclick="toggleProgram()">
+    <span class="program-toggle-label">View Program Details</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="program-toggle-hint" id="program-toggle-hint">5 experiences</span>
+      <svg class="program-toggle-chevron" viewBox="0 0 18 18" fill="none">
+        <line x1="3" y1="6" x2="9" y2="12"/><line x1="9" y1="12" x2="15" y2="6"/>
+      </svg>
+    </div>
+  </div>
+  <div class="program-body" id="program-body-el">
+    <div class="class-cards" id="class-cards-el"></div>
+  </div>
 </section>
 
 <!-- NEXT STEPS -->
@@ -402,41 +514,54 @@ CONFIG.meta.forEach((m, i) => {
   periodEl.innerHTML += `<div class="period-item"><span class="period-label">${m.label}</span><span class="period-value">${m.value}</span></div>`;
 });
 
-// Class accordion
-const accordion = document.getElementById('class-accordion-el');
+// Program toggle — single toggle reveals all cards
+const cardsEl  = document.getElementById('class-cards-el');
+const toggleEl = document.getElementById('program-toggle-el');
+const bodyEl   = document.getElementById('program-body-el');
+document.getElementById('program-toggle-hint').textContent = CONFIG.classes.length + ' experiences';
+
 CONFIG.classes.forEach((cls, i) => {
-  const item = document.createElement('div');
-  item.className = 'class-item reveal';
-  item.innerHTML = `
-    <button class="class-trigger" aria-expanded="false" onclick="toggleClass(this)">
-      <span class="class-month">${cls.month}</span>
-      <span class="class-title">${cls.title}</span>
-      <span class="class-tag">${cls.tag}</span>
-      <svg class="class-chevron" viewBox="0 0 18 18" fill="none">
-        <line x1="3" y1="6" x2="9" y2="12"/>
-        <line x1="9" y1="12" x2="15" y2="6"/>
-      </svg>
-    </button>
-    <div class="class-body">
-      <div class="class-body-inner">
-        <p class="class-desc">${cls.desc}</p>
-        <div>
-          <div class="class-benefits-label">${i === 4 ? 'Potential Options' : 'Resident Benefits'}</div>
-          <ul class="class-benefits-list">
-            ${cls.benefits.map(b => `<li>${b}</li>`).join('')}
-          </ul>
-        </div>
-      </div>
+  const flip = i % 2 !== 0;
+  const card = document.createElement('div');
+  card.className = `option-card${flip ? ' flip' : ''} reveal`;
+
+  // Always render photo side — placeholder if no photoUrl (matches original design)
+  const photoContent = cls.photoUrl
+    ? `<img src="${cls.photoUrl}" alt="${cls.title}">`
+    : `<div class="option-photo-placeholder">
+        <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 28L13 20L19 26L25 20L36 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ${cls.title}
+       </div>`;
+
+  const benefitsLabel = i === CONFIG.classes.length - 1 ? 'Potential Options' : 'Resident Benefits';
+
+  card.innerHTML = `
+    <div class="option-card-photo">
+      ${photoContent}
+      <div class="option-num">0${i + 1}</div>
+    </div>
+    <div class="option-card-body">
+      ${cls.month ? `<div class="option-month">${cls.month}</div>` : ''}
+      <span class="option-tag">${cls.tag}</span>
+      <h3 class="option-name">${cls.title}</h3>
+      <p class="option-desc">${cls.desc}</p>
+      <div class="option-benefits-label">${benefitsLabel}</div>
+      <ul class="option-benefits">${cls.benefits.map(b => `<li>${b}</li>`).join('')}</ul>
     </div>`;
-  accordion.appendChild(item);
+
+  cardsEl.appendChild(card);
 });
 
-function toggleClass(btn) {
-  const item = btn.closest('.class-item');
-  const body = item.querySelector('.class-body');
-  const open = item.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-  body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
+function toggleProgram() {
+  const open = toggleEl.classList.toggle('program-open');
+  if (open) {
+    bodyEl.style.maxHeight = bodyEl.scrollHeight + 'px';
+    bodyEl.querySelectorAll('.reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
+    });
+  } else {
+    bodyEl.style.maxHeight = '0';
+  }
 }
 
 // Next steps
