@@ -312,8 +312,9 @@ const CONFIG = {
   emailjs: {
     publicKey:  'Zsh7DzszsSoxTD4BN',
     serviceId:  'service_a2z47rl',
-    templateId: 'template_rlsqa1e',
-    rfEmail:    'milena.mikic@gmail.com',  // TEST — swap to gina@RFStudiosMiami.com in real proposals
+    templateId:     'template_rlsqa1e',  // client confirmation template
+    ginaTemplateId: '',                  // Gina notification template — paste ID after creating in EmailJS
+    rfEmail:        'milena.mikic@gmail.com',  // TEST — swap to gina@RFStudiosMiami.com in real proposals
   },
 
   // ── GitHub (PDF archiving) ────────────────────────────────
@@ -547,7 +548,7 @@ const CONFIG = {
   <div class="sig-confirm" id="sig-confirm">
     <div class="sig-confirm-check">✓</div>
     <div class="sig-confirm-title">Proposal Accepted</div>
-    <div class="sig-confirm-sub">Agreement sent to <strong id="confirm-email" style="color:var(--pear)"></strong> and to gina@RFStudiosMiami.com.<br>A signed PDF was downloaded to your device.</div>
+    <div class="sig-confirm-sub">Agreement sent to <strong id="confirm-email" style="color:var(--pear)"></strong> and to gina@RFStudiosMiami.com.<br>Your signed PDF was downloaded to your device — check your <strong>Downloads folder</strong>.</div>
     <div class="sig-confirm-details" id="confirm-details"></div>
   </div>
 </section>
@@ -865,9 +866,9 @@ function sendEmails(d, pdfUrl) {
     proposal_title:   CONFIG.client.name + ' — RF Studios Wellness Proposal',
     program_period:   programPeriod(),
   };
-  const toGina = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
+  const toGina = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.ginaTemplateId || CONFIG.emailjs.templateId, {
     ...base, email: CONFIG.emailjs.rfEmail, reply_to: d.email,
-    subject: `✓ Signed Proposal — ${d.name} / ${d.company}`,
+    subject: `✓ Signed — ${d.name} / ${d.company}`,
   });
   const toClient = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
     ...base, email: d.email, reply_to: CONFIG.emailjs.rfEmail,
