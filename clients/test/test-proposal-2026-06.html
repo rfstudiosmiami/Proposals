@@ -316,7 +316,7 @@ const CONFIG = {
 
   // ── GitHub (PDF archiving) ────────────────────────────────
   github: {
-    token: '',  // paste fine-grained PAT here — contents:write on rfstudiosmiami/Proposals only
+    workerUrl: '',  // Cloudflare Worker URL — paste after deploying pdf-saver-worker
   },
 
   // ── Client ────────────────────────────────────────────────
@@ -902,20 +902,14 @@ function getRepoFolder() {
 }
 
 async function savePdfToGithub(base64, filename) {
-  var path = getRepoFolder() + '/' + filename;
-  var res = await fetch(
-    'https://api.github.com/repos/rfstudiosmiami/Proposals/contents/' + path,
-    {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'Bearer ' + CONFIG.github.token,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message: 'signed: ' + filename, content: base64 }),
-    }
-  );
-  if (!res.ok) throw new Error('GitHub API ' + res.status);
-  return 'https://github.com/rfstudiosmiami/Proposals/blob/main/' + path;
+  var res = await fetch(CONFIG.github.workerUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ base64: base64, filename: filename, folder: getRepoFolder() }),
+  });
+  if (!res.ok) throw new Error('Worker error ' + res.status);
+  var data = await res.json();
+  return data.url;
 }
 
 async function handleSubmit() {
@@ -951,7 +945,7 @@ async function handleSubmit() {
 
   // Step 3 — save PDF to GitHub, get link for Gina's email
   var pdfUrl = '';
-  if (pdf && CONFIG.github && CONFIG.github.token) {
+  if (pdf && CONFIG.github && CONFIG.github.workerUrl) {
     try { pdfUrl = await savePdfToGithub(pdf.base64, pdf.filename); }
     catch (err) { console.warn('GitHub PDF save failed:', err); }
   }
