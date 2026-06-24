@@ -703,7 +703,9 @@ function buildPdf(d) {
   doc.text('RF STUDIOS MIAMI', M, 46);
   doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(160, 200, 170);
   doc.text('Wellness Program Agreement', M, 66);
-  doc.setFontSize(8); doc.setTextColor(140, 180, 155);
+  doc.setFontSize(8); doc.setTextColor(160, 200, 170);
+  doc.text('#' + d.proposalRef, W - M, 46, { align: 'right' });
+  doc.setTextColor(140, 180, 155);
   doc.text(d.timestamp, W - M, 66, { align: 'right' });
 
   // ── Title ─────────────────────────────────────────────────
@@ -829,6 +831,7 @@ function buildPdf(d) {
   doc.text(d.company, M, sigY + 13);
   doc.text(d.email, M, sigY + 26);
   doc.text('Date: ' + d.timestamp, M, sigY + 39);
+  doc.text('Ref: #' + d.proposalRef, M, sigY + 52);
 
   doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5); doc.setTextColor(80, 80, 80);
   doc.text('RF Studios Miami', W - M - 160, sigY);
@@ -837,15 +840,20 @@ function buildPdf(d) {
   doc.text('gina@RFStudiosMiami.com', W - M - 160, sigY + 26);
   doc.text('RFStudiosMiami.com', W - M - 160, sigY + 39);
 
-  doc.save(clientSlug() + '-proposal-signed-' + new Date().toISOString().slice(0, 10) + '.pdf');
+  doc.save(clientSlug() + '-proposal-' + d.proposalRef + '.pdf');
 }
 
 function sendEmails(d) {
   const base = {
-    client_name: d.name, client_title: d.title, client_company: d.company,
-    client_email: d.email, timestamp: d.timestamp,
-    proposal_title: `${CONFIG.client.name} — RF Studios Wellness Proposal`,
-    program_period: programPeriod(),
+    client_name:      d.name,
+    client_name_full: d.name + (d.title ? ', ' + d.title : ''),
+    client_title:     d.title,
+    client_company:   d.company,
+    client_email:     d.email,
+    timestamp:        d.timestamp,
+    proposal_ref:     '#' + d.proposalRef,
+    proposal_title:   CONFIG.client.name + ' — RF Studios Wellness Proposal',
+    program_period:   programPeriod(),
   };
   const toGina = emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
     ...base, email: CONFIG.emailjs.rfEmail, reply_to: d.email,
@@ -864,7 +872,8 @@ function showConfirmation(d) {
   document.getElementById('confirm-details').innerHTML =
     `<div><strong>Signed by:</strong> ${d.name}${d.title ? ', ' + d.title : ''}</div>` +
     `<div style="margin-top:8px"><strong>Organization:</strong> ${d.company}</div>` +
-    `<div style="margin-top:8px"><strong>Date:</strong> ${d.timestamp}</div>`;
+    `<div style="margin-top:8px"><strong>Date:</strong> ${d.timestamp}</div>` +
+    `<div style="margin-top:8px"><strong>Ref:</strong> #${d.proposalRef}</div>`;
   const c = document.getElementById('sig-confirm');
   c.classList.add('visible');
   c.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -887,7 +896,14 @@ function handleSubmit() {
   sigBtn.disabled = true;
   sigBtn.textContent = 'Processing…';
 
-  d.timestamp = new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' });
+  var _now = new Date();
+  d.timestamp = _now.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' });
+  var _yy = String(_now.getFullYear()).slice(2);
+  var _mo = String(_now.getMonth() + 1).padStart(2, '0');
+  var _dy = String(_now.getDate()).padStart(2, '0');
+  var _hr = String(_now.getHours()).padStart(2, '0');
+  var _mn = String(_now.getMinutes()).padStart(2, '0');
+  d.proposalRef = _yy + _mo + _dy + '_' + _hr + _mn;
 
   // Step 2 — client-side PDF (downloads to device)
   try { buildPdf(d); }
