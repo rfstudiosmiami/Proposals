@@ -314,6 +314,11 @@ const CONFIG = {
     rfEmail:    'gina@RFStudiosMiami.com',
   },
 
+  // ── GitHub (PDF archiving) ────────────────────────────────
+  github: {
+    token: '',  // paste fine-grained PAT here — contents:write on rfstudiosmiami/Proposals only
+  },
+
   // ── Client ────────────────────────────────────────────────
   client: {
     name:    "CLIENT NAME",
@@ -837,10 +842,11 @@ function buildPdf(d) {
   doc.text('gina@RFStudiosMiami.com', W - M - 160, sigY + 26);
   doc.text('RFStudiosMiami.com', W - M - 160, sigY + 39);
 
-  doc.save(clientSlug() + '-proposal-' + d.proposalRef + '.pdf');
+  var filename = clientSlug() + '-proposal-' + d.proposalRef + '.pdf';
+  return { base64: doc.output('datauristring').split(',')[1], filename: filename };
 }
 
-function sendEmails(d) {
+function sendEmails(d, pdfUrl) {
   const base = {
     client_name:      d.name,
     client_name_full: d.name + (d.title ? ', ' + d.title : ''),
@@ -849,6 +855,7 @@ function sendEmails(d) {
     client_email:     d.email,
     timestamp:        d.timestamp,
     proposal_ref:     '#' + d.proposalRef,
+    pdf_link:         pdfUrl || '',
     proposal_title:   CONFIG.client.name + ' — RF Studios Wellness Proposal',
     program_period:   programPeriod(),
   };
@@ -876,7 +883,39 @@ function showConfirmation(d) {
   c.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-function handleSubmit() {
+function triggerDownload(base64, filename) {
+  var a = document.createElement('a');
+  a.href = 'data:application/pdf;base64,' + base64;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function getRepoFolder() {
+  var parts = window.location.pathname.split('/');
+  var ci = parts.indexOf('clients');
+  return (ci >= 0 && parts[ci + 1]) ? 'clients/' + parts[ci + 1] : 'clients/' + clientSlug();
+}
+
+async function savePdfToGithub(base64, filename) {
+  var path = getRepoFolder() + '/' + filename;
+  var res = await fetch(
+    'https://api.github.com/repos/rfstudiosmiami/Proposals/contents/' + path,
+    {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + CONFIG.github.token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: 'signed: ' + filename, content: base64 }),
+    }
+  );
+  if (!res.ok) throw new Error('GitHub API ' + res.status);
+  return 'https://github.com/rfstudiosmiami/Proposals/blob/main/' + path;
+}
+
+async function handleSubmit() {
   const d = {
     name:    sigName.value.trim(),
     title:   sigTitle.value.trim(),
@@ -884,10 +923,8 @@ function handleSubmit() {
     email:   sigEmail.value.trim(),
   };
 
-  // Step 1 — validation
   if (!d.name || !d.company || !d.email || !d.email.includes('@')) {
-    sigError.classList.add('visible');
-    return;
+    sigError.classList.add('visible'); return;
   }
   sigError.classList.remove('visible');
   sigBtn.disabled = true;
@@ -902,14 +939,24 @@ function handleSubmit() {
   var _mn = String(_now.getMinutes()).padStart(2, '0');
   d.proposalRef = _yy + _mo + _dy + '_' + _hr + _mn;
 
-  // Step 2 — client-side PDF (downloads to device)
-  try { buildPdf(d); }
-  catch (err) { console.error('PDF generation failed:', err); }
+  // Step 1 — generate PDF (base64, no download yet)
+  var pdf = null;
+  try { pdf = buildPdf(d); } catch (err) { console.error('PDF generation failed:', err); }
 
-  // Step 3 — notify Gina + the client, then Step 4 — confirmation screen
-  sendEmails(d).then(results => {
-    results.filter(r => r.status === 'rejected')
-           .forEach(r => console.warn('EmailJS send failed:', r.reason));
+  // Step 2 — download to client's device
+  if (pdf) triggerDownload(pdf.base64, pdf.filename);
+
+  // Step 3 — save PDF to GitHub, get link for Gina's email
+  var pdfUrl = '';
+  if (pdf && CONFIG.github && CONFIG.github.token) {
+    try { pdfUrl = await savePdfToGithub(pdf.base64, pdf.filename); }
+    catch (err) { console.warn('GitHub PDF save failed:', err); }
+  }
+
+  // Step 4 — send emails; Step 5 — confirmation screen
+  sendEmails(d, pdfUrl).then(function(results) {
+    results.filter(function(r) { return r.status === 'rejected'; })
+           .forEach(function(r) { console.warn('EmailJS send failed:', r.reason); });
     showConfirmation(d);
   });
 }
